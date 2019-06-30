@@ -1,5 +1,5 @@
 import org.apache.commons.io.FileUtils;
-import vector.Vec3;
+import geometry.Vec3;
 
 import java.io.File;
 import java.io.IOException;

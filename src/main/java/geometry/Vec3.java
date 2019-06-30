@@ -1,4 +1,4 @@
-package vector;
+package geometry;
 
 import static java.lang.StrictMath.sqrt;
 
@@ -93,5 +93,9 @@ public class Vec3 {
                 e[2]*other.e[0] - other.e[2]*e[0],
                 e[0]*other.e[1] - other.e[0]*e[1]
         );
+    }
+
+    public static Vec3 unit_vector(Vec3 v) {
+        return v.devide(v.length());
     }
 }
