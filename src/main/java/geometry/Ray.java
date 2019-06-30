@@ -5,6 +5,14 @@ public class Ray {
     public Vec3 origin;
     public Vec3 direction;
 
+    @Override
+    public String toString() {
+        return "Ray{" +
+                "origin=" + origin +
+                ", direction=" + direction +
+                '}';
+    }
+
     public Ray(Vec3 origin, Vec3 direction) {
         this.origin = origin;
         this.direction = direction;
