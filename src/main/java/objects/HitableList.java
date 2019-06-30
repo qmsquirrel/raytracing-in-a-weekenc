@@ -1,4 +1,6 @@
-package geometry;
+package objects;
+
+import geometry.Ray;
 
 import java.util.List;
 

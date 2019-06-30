@@ -1,4 +1,7 @@
-package geometry;
+package objects;
+
+import geometry.Ray;
+import geometry.Vec3;
 
 import static geometry.Vec3.dot;
 import static java.lang.StrictMath.sqrt;

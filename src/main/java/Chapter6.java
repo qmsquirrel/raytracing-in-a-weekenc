@@ -1,4 +1,6 @@
-import geometry.*;
+import geometry.Camera;
+import geometry.Ray;
+import geometry.Vec3;
 import objects.HitRecord;
 import objects.Hitable;
 import objects.HitableList;
@@ -12,11 +14,12 @@ import java.util.List;
 
 import static geometry.Vec3.normalize;
 
-public class Chapter5 {
+public class Chapter6 {
 
-    static final String fileName = "results/chapter5p2.ppm";
-    static final int width = 400;
-    static final int height = 200;
+    static final String fileName = "results/chapter6.ppm";
+    static final int width = 500;
+    static final int height = 250;
+    static final int trials = 25;
 
 
     public static Vec3 color(Ray r, HitableList world) {
@@ -42,24 +45,23 @@ public class Chapter5 {
                 output,"P3\n" + width + " " + height + "\n255\n",
                 "UTF-8");
 
-        Vec3 lower_left_corner = new Vec3(-2.0f, -1.0f,  -1.0f);
-        Vec3 horizontal = new Vec3(4.0f, 0.0f, 0.0f);
-        Vec3 vertical = new Vec3(0.0f, 2.0f, 0.0f);
-        Vec3 origin = new Vec3(0.0f, 0.0f, 0.0f);
-
         List<Hitable> objects = new ArrayList<Hitable>(2);
         objects.add(new Sphere(new Vec3(0,0,-1),0.5f));
         objects.add(new Sphere(new Vec3(0,-100.5f,-1),100f));
         HitableList world = new HitableList(objects);
 
+        Camera cam = new Camera();
+
         for (int j = height-1; j >= 0; j--) {
             for (int i = 0; i < width; i++) {
-                double u = (double) i / (double) width;
-                double v = (double) j / (double) height;
-                Ray ray = new Ray(origin, lower_left_corner
-                        .add(horizontal.scale(u))
-                        .add(vertical.scale(v)));
-                Vec3 col = color(ray, world);
+                Vec3 col = new Vec3(0f,0f,0f);
+                for (int trial = 0; trial < trials; trial++) {
+                    double u = (i+Math.random()) / (double) width;
+                    double v = (j+Math.random()) / (double) height;
+                    Ray r = cam.getRay(u,v);
+                    col = col.add(color(r,world));
+                }
+                col = col.scale(1.0/(float)trials);
                 int ig = (int) (255.99*col.g());
                 int ir = (int) (255.99*col.r());
                 int ib = (int) (255.99*col.b());
