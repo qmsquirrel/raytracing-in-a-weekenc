@@ -1,11 +1,12 @@
 import org.apache.commons.io.FileUtils;
+import vector.Vec3;
 
 import java.io.File;
 import java.io.IOException;
 
-public class Chapter1 {
+public class Chapter2 {
 
-    static final String fileName = "results/chapter1.ppm";
+    static final String fileName = "results/chapter2.ppm";
 
     public static void main(String[] args) throws IOException {
         int nx = 200;
@@ -15,13 +16,12 @@ public class Chapter1 {
 
         ppmFile = "P3\n" + nx + " " + ny + "\n255\n";
         for (int j = ny-1; j >= 0; j--) {
-            double g = (double) j / nx;
-            int ig = (int) (255.99*g);
             for (int i = 0; i < nx; i++) {
-                double r = (double) i / nx;
-                double b = 0.2;
-                int ir = (int) (255.99*r);
-                int ib = (int) (255.99*b);
+                Vec3 col = new Vec3(
+                        (double) i / nx, (double) j / nx, 0.2);
+                int ig = (int) (255.99*col.g());
+                int ir = (int) (255.99*col.r());
+                int ib = (int) (255.99*col.b());
                 ppmFile += ir + " " + ig + " " + ib + "\n" ;
             }
         }
