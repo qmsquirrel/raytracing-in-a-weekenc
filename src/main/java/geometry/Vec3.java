@@ -104,4 +104,12 @@ public class Vec3 {
         );
     }
 
+    public static Vec3 randomInUnitSphere() {
+        Vec3 p;
+        do {
+            p = new Vec3(Math.random(),Math.random(), Math.random()).scale(2.0f).subtract(new Vec3(1,1,1));
+        } while (p.squared_length() >= 1.0f);
+        return p;
+    }
+
 }
