@@ -13,28 +13,23 @@ public class Ray {
                 '}';
     }
 
+    public Ray() {
+    }
+
     public Ray(Vec3 origin, Vec3 direction) {
         this.origin = origin;
         this.direction = direction;
     }
 
-    public Vec3 getOrigin() {
+    public Vec3 origin() {
         return origin;
     }
 
-    public void setOrigin(Vec3 origin) {
-        this.origin = origin;
-    }
-
-    public Vec3 getDirection() {
+    public Vec3 direction() {
         return direction;
     }
 
-    public void setDirection(Vec3 direction) {
-        this.direction = direction;
-    }
-
-    Vec3 pointAtParameter(double t) {
-        return origin.add(direction.multiply(t));
+    public Vec3 pointAtParameter(double t) {
+        return origin.add(direction.scale(t));
     }
 }

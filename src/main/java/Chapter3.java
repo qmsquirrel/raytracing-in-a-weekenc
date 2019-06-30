@@ -10,10 +10,10 @@ public class Chapter3 {
     static final String fileName = "results/chapter3.ppm";
 
     static Vec3 color(Ray ray) {
-        Vec3 unit_direction = Vec3.unit_vector(ray.getDirection());
+        Vec3 unit_direction = Vec3.normalize(ray.direction());
         double t = 0.5*(unit_direction.y() + 1.0);
-        return (new Vec3(1.0, 1.0, 1.0).multiply(1.0-t))
-                .add(new Vec3(0.5, 0.7, 1.0).multiply(t));
+        return (new Vec3(1.0, 1.0, 1.0).scale(1.0-t))
+                .add(new Vec3(0.5, 0.7, 1.0).scale(t));
     }
 
     public static void main(String[] args) throws IOException {
@@ -33,8 +33,8 @@ public class Chapter3 {
                 double v = (double) j / nx;
                 Ray ray = new Ray(origin,
                         lower_left_corner
-                        .add(horizontal.multiply(u))
-                        .add(vertical.multiply(v)));
+                        .add(horizontal.scale(u))
+                        .add(vertical.scale(v)));
                 Vec3 col = color(ray);
                 int ig = (int) (255.99*col.g());
                 int ir = (int) (255.99*col.r());
