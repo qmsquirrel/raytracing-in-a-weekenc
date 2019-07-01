@@ -2,6 +2,7 @@ package objects;
 
 import geometry.Ray;
 import geometry.Vec3;
+import objects.material.Material;
 
 import static geometry.Vec3.dot;
 import static java.lang.StrictMath.sqrt;
@@ -10,6 +11,13 @@ public class Sphere implements Hitable {
 
     Vec3 center;
     double radius;
+    Material material;
+
+    public Sphere(Vec3 center, double radius, Material material) {
+        this.center = center;
+        this.radius = radius;
+        this.material = material;
+    }
 
     public Sphere(Vec3 center, double radius) {
         this.center = center;
@@ -33,6 +41,7 @@ public class Sphere implements Hitable {
                 hitRec.t = tempT;
                 hitRec.p = r.pointAtParameter(tempT);
                 hitRec.normal = hitRec.p.subtract(center).scale(1/radius);
+                hitRec.mat = material;
                 return true;
             }
         }

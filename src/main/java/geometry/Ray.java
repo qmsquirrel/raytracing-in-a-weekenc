@@ -32,4 +32,9 @@ public class Ray {
     public Vec3 pointAtParameter(double t) {
         return origin.add(direction.scale(t));
     }
+
+    public void set(Ray r) {
+        this.origin = r.origin;
+        this.direction = r.direction;
+    }
 }

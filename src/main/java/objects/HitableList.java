@@ -22,6 +22,7 @@ public class HitableList {
                 hitRec.t = tempRec.t;
                 hitRec.p = tempRec.p;
                 hitRec.normal = tempRec.normal;
+                hitRec.mat = tempRec.mat;
             }
         }
         return hitAnything;

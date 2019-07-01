@@ -96,6 +96,16 @@ public class Vec3 {
         return one.e[0] * other.e[0]+ one.e[1] * other.e[1]+ one.e[2] * other.e[2];
     }
 
+    public Vec3 times(Vec3 other) {
+        return new Vec3(e[0]*other.e[0], e[1]*other.e[1], e[2]*other.e[2]);
+    }
+
+    public void set(Vec3 v) {
+        e[0] = v.x();
+        e[1] = v.y();
+        e[2] = v.z();
+    }
+
     public static Vec3 cross(Vec3 one, Vec3 two) {
         return new Vec3(
                 one.e[1]*two.e[2] - two.e[1]*one.e[2],
@@ -110,6 +120,10 @@ public class Vec3 {
             p = new Vec3(Math.random(),Math.random(), Math.random()).scale(2.0f).subtract(new Vec3(1,1,1));
         } while (p.squared_length() >= 1.0f);
         return p;
+    }
+
+    public static Vec3 reflect(Vec3 v, Vec3 normal) {
+        return v.subtract(normal.scale(dot(v,normal)).scale(2));
     }
 
 }
